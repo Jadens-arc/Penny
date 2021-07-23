@@ -7,6 +7,7 @@ function createWindow() {
     autoHideMenuBar: true,
     frame: false,
     transparent: true,
+    logo: __dirname + "/Assets/logo.png",
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
