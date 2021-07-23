@@ -20,6 +20,14 @@ npm test
 
 Compiled versions for Windows and Linux coming soon
 
+## Keyboard Shortcuts
+
+| Shortcut     | Function  |
+| ------------ | --------- |
+| ctrl+w       | Close App |
+| ctrl+n       | New Note  |
+| ctrl+shift+n | New Tab   |
+
 ## Background Information
 
 This app was writing using Node.js and Electron for the UI, AES for encrypting notes, and MD5 for hashing passwords.
