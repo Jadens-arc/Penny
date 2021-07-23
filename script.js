@@ -12,17 +12,35 @@ let currentTab;
 let key;
 let config = JSON.parse(fs.readFileSync("./config.json"));
 let path = config.path;
+
+// read tabs and parse tabs
+(function () {
+  let file = fs.readFileSync(path);
+  tabData = JSON.parse(file);
+  tabs = Object.keys(tabData);
+  if (tabs.length == 0) {
+    loginInput.placeholder =
+      "Type Password Here, this will be your new password";
+  }
+})();
+
 ipcRenderer.on("newPath", (event, newPath) => {
   path = newPath;
   config.path = path;
   fs.writeFileSync("config.json", JSON.stringify(config, 2, 2));
+  let file = fs.readFileSync(path);
+  tabData = JSON.parse(file);
+  tabs = Object.keys(tabData);
+  if (tabs.length == 0) {
+    loginInput.placeholder =
+      "Type Password Here, this will be your new password";
+  } else {
+    loginInput.placeholder = "Type Password Here";
+  }
 });
 
 loginInput.addEventListener("keypress", (e) => {
   if (e.key == "Enter") {
-    let file = fs.readFileSync(path);
-    tabData = JSON.parse(file);
-    tabs = Object.keys(tabData);
     let hash = crypto.createHash("md5").update(loginInput.value).digest("hex");
     key = hash;
     if (tabData == {}) return;
