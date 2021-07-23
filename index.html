@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Penny</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/83c368ecc2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="menu">
+      <ul class="menu-options">
+        <li id="menuDeleteBtn" class="menu-option">Delete</li>
+        <li id="menuRenameBtn" class="menu-option">Rename</li>
+      </ul>
+    </div>
+    <div class="titleBarContainer">
+      <div class="titleBar"></div>
+    </div>
+    <div id="loginWindow" class="loginWindow">
+      <textarea
+        type="text"
+        id="login"
+        placeholder="Type Password Here"
+        class="login"
+      ></textarea>
+      <button
+        title="Select Wallet"
+        id="selectWallet"
+        class="selectWallet fas fa-cog"
+      ></button>
+    </div>
+    <main>
+      <ul id="nav" class="blur nav">
+        <li id="addTab" class="addTab"><b>New</b></li>
+      </ul>
+
+      <div id="addNoteBtnContainer" class="blur addNoteBtnContainer">
+        <i id="addNoteBtn" class="fas fa-plus addNoteBtn"></i>
+      </div>
+      <div class="notes blur" id="notes"></div>
+    </main>
+  </body>
+</html>
