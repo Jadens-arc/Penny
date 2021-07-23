@@ -1,0 +1,19 @@
+{
+  "name": "penny",
+  "version": "1.0.0",
+  "description": "An offline, encrypted, and secure notes app",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "keywords": [],
+  "author": "Jaden arceneaux",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^13.1.7"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "crypto": "^1.0.1"
+  }
+}
