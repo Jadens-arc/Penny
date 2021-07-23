@@ -1,12 +1,4 @@
-const {
-  app,
-  BrowserWindow,
-  screen,
-  NodeEventEmitter,
-  Menu,
-  ipcMain,
-  dialog,
-} = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const fs = require("fs");
 function createWindow() {
   let win = new BrowserWindow({
