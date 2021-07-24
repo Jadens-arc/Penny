@@ -4,13 +4,28 @@
   "description": "An offline, encrypted, and secure notes app",
   "main": "index.js",
   "scripts": {
-    "test": "electron ."
+    "test": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.jadens-arc.penny",
+    "productName": "Penny",
+    "icon": "./Assets/logo.png",
+    "target": "NSIS",
+    "directories": {
+      "output": "build"
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false
+    }
   },
   "keywords": [],
   "author": "Jaden arceneaux",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^13.1.7"
+    "electron": "^13.1.7",
+    "electron-builder": "^22.11.7"
   },
   "dependencies": {
     "buffer": "^6.0.3",
