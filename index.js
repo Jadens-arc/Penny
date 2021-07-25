@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const fs = require("fs");
+const dotenv = require("dotenv");
+dotenv.config();
+
 function createWindow() {
   let win = new BrowserWindow({
     width: 500,
@@ -7,7 +9,7 @@ function createWindow() {
     autoHideMenuBar: true,
     frame: false,
     transparent: true,
-    logo: __dirname + "/Assets/logo.png",
+    logo: __dirname + "/Assets/logo.ico",
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -15,7 +17,9 @@ function createWindow() {
     },
   });
   win.setAlwaysOnTop(true);
-  // win.webContents.openDevTools(); dev option
+  if (process.env.NODE_ENV === "development") {
+    win.webContents.openDevTools();
+  }
   win.loadFile("index.html");
 }
 
