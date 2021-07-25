@@ -6,12 +6,27 @@ const navEle = document.getElementById("nav");
 const loginInput = document.getElementById("login");
 const selectWallet = document.getElementById("selectWallet");
 const { ipcRenderer } = require("electron");
+const Path = require("path");
+
 let tabData;
 let tabs;
 let currentTab;
 let key;
-let config = JSON.parse(fs.readFileSync("./config.json"));
+let isDevelopment = process.env.NODE_ENV === "development";
+
+let config = isDevelopment
+  ? Path.join(__dirname, "config.json")
+  : Path.join(process.resourcesPath, "config.json");
+config = JSON.parse(fs.readFileSync(config));
+
 let path = config.path;
+if (path == "starter") {
+  if (isDevelopment) {
+    path = Path.join(__dirname, "starter.json");
+  } else {
+    path = Path.join(process.resourcesPath, "starter.json");
+  }
+}
 
 // read tabs and parse tabs
 (function () {
