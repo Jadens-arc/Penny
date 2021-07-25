@@ -18,7 +18,17 @@
     "nsis": {
       "allowToChangeInstallationDirectory": true,
       "oneClick": false
-    }
+    },
+    "extraResources": [
+      {
+        "from": "config.json",
+        "to": "config.json"
+      },
+      {
+        "from": "starter.json",
+        "to": "starter.json"
+      }
+    ]
   },
   "keywords": [],
   "author": "Jaden arceneaux",
