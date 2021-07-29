@@ -35,7 +35,6 @@ function creatInstructionsWindow() {
   win.setAlwaysOnTop(true);
   if (process.env.NODE_ENV === "development") {
     win.setAlwaysOnTop(true);
-    win.webContents.openDevTools();
   }
   win.loadFile("instructions.html");
 }
@@ -50,6 +49,10 @@ ipcMain.on("openFile", async (event, path) => {
 
 ipcMain.on("showInstructions", (event) => {
   creatInstructionsWindow();
+});
+
+ipcMain.on("log", (event, msg) => {
+  console.log(msg);
 });
 
 app.whenReady().then(createWindow);
