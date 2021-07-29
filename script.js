@@ -226,8 +226,10 @@ function displayAddTab() {
   newTab.appendChild(newTabEnt);
   navEle.appendChild(newTab);
   newTabEnt.focus();
-  newTabEnt.addEventListener("keypress", (e) => {
-    if (e.key == "Enter") {
+  newTabEnt.addEventListener("keydown", (e) => {
+    if (e.key == "Escape") {
+      navEle.removeChild(newTab);
+    } else if (e.key == "Enter") {
       let name = encryptData(newTabEnt.value);
       tabData[name] = [];
       tabs.push(name);
