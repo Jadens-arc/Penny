@@ -33,7 +33,7 @@ main {
   display: flex;
 }
 
-.titleBarContainer{ 
+.titleBarContainer {
   position: absolute;
   z-index: 1000000000;
   width: 100%;
@@ -43,6 +43,22 @@ main {
   -webkit-app-region: drag;
   border-radius: 30px;
   height: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#closeBtn {
+  color: grey;
+  font-size: 1.5rem;
+  transition: all ease 0.2s;
+  -webkit-app-region: none;
+  border-radius: 50%;
+  height: fit-content;
+  padding: 5px;
+}
+
+#closeBtn:hover {
+  color: red;
 }
 
 ::-webkit-scrollbar {

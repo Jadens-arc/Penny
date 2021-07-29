@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+:root {
+  --text-color: white;
+  --background-color-secondary: #444444;
+  --background-color-primary: #171717;
+}
+
+html {
+  background: transparent;
+}
+
+body {
+  height: 100vh;
+  background-color: transparent;
+  overflow: hidden;
+  width: 100vw;
+}
+
+
+main {
+  border: 1px solid grey;
+  border-radius: 30px;
+  background-color: var(--background-color-primary);
+  color: var(--text-color);
+  font-family: sans-serif;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.titleBarContainer{ 
+  position: absolute;
+  z-index: 1000000000;
+  width: 100%;
+  padding: 10px;
+}
+.titleBar {
+  -webkit-app-region: drag;
+  border-radius: 30px;
+  height: 40px;
+}
+
+::-webkit-scrollbar {
+  background-color: var(--background-color-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--background-color-primary);
+  border-radius: 50px;
+  border: 2px solid grey;
+}
+
+h1 {
+  animation: fadeSlideUp 2s 1s ease forwards;
+  opacity: 0;
+  margin-bottom: 50px;
+}
+
+h2 {
+  animation: fadeSlideUp 1s 3s ease forwards;
+  opacity: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+#shocker {
+  margin: 10px;
+}
+
+#shocker span{
+  opacity: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+#shocker p {
+  opacity: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 20px -10px;
+}
+
+#shocker p span{
+  opacity: 1;
+}
+
+#shocker br {
+  font-size: 1.5rem;
+}
+
+#shocker #continue {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  border: 1px solid grey;
+  border-radius: 7px;
+  outline: none;
+  background-color: transparent;
+  color: grey;
+  opacity: 0;
+  padding: 10px;
+  font-size: 1.5rem;
+  transition: color ease 0.2s;
+  transition: background-color ease 0.2s;
+  text-decoration: none;
+}
+
+#shocker .link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#shocker #continue:hover {
+  color: var(--background-color-primary);
+  background-color: grey;
+}
+
+#shocker .dead {
+  color: red;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Use</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --text-color: white;
+        --background-color-secondary: #444444;
+        --background-color-primary: #171717;
+      }
+
+      body {
+        min-height: 100vh;
+      }
+
+      main {
+        min-height: 100vh;
+        background-color: var(--background-color-primary);
+        border: 1px solid grey;
+        border-radius: 30px;
+        color: white;
+        font-family: sans-serif;
+        padding: 20px;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      td {
+        padding: 10px 0;
+      }
+
+      h1 {
+        margin: 10px 0;
+      }
+
+      h2 {
+        margin: 10px 0;
+      }
+
+      .titleBarContainer {
+        position: absolute;
+        z-index: 1000000000;
+        width: 100%;
+        padding: 10px;
+      }
+      .titleBar {
+        -webkit-app-region: drag;
+        border-radius: 30px;
+        height: 40px;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      #closeBtn {
+        color: grey;
+        font-size: 1.5rem;
+        transition: all ease 0.2s;
+        -webkit-app-region: none;
+        border-radius: 50%;
+        height: fit-content;
+        padding: 5px;
+      }
+
+      #closeBtn:hover {
+        color: red;
+      }
+
+      ol {
+        margin: 0 1rem;
+      }
+    </style>
+    <script
+      src="https://kit.fontawesome.com/83c368ecc2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="titleBarContainer">
+      <div class="titleBar">
+        <i id="closeBtn" class="far fa-times-circle"></i>
+      </div>
+    </div>
+    <main>
+      <h1>How to Use</h1>
+      <hr />
+      <h2>Basics</h2>
+      <ol>
+        <li>Click New List to make a new list</li>
+        <li>Click the plus sign to add a new note to the list</li>
+      </ol>
+
+      <h2>Keyboard Shortcuts</h2>
+      <table>
+        <tr>
+          <th>Key Stroke</th>
+          <th>Function</th>
+        </tr>
+        <tr>
+          <td>Control + w</td>
+          <td>Close Application</td>
+        </tr>
+        <tr>
+          <td>Control + n</td>
+          <td>Add Note</td>
+        </tr>
+        <tr>
+          <td>Control + shift + n</td>
+          <td>Add Notes List</td>
+        </tr>
+      </table>
+    </main>
+
+    <script>
+      const closeBtn = document.getElementById("closeBtn");
+
+      closeBtn.addEventListener("click", () => {
+        window.close();
+      });
+    </script>
+  </body>
+</html>

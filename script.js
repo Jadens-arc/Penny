@@ -7,6 +7,11 @@ const loginInput = document.getElementById("login");
 const selectWallet = document.getElementById("selectWallet");
 const { ipcRenderer } = require("electron");
 const Path = require("path");
+const closeBtn = document.getElementById("closeBtn");
+
+closeBtn.addEventListener("click", () => {
+  window.close();
+});
 
 let tabData;
 let tabs;
@@ -14,10 +19,17 @@ let currentTab;
 let key;
 let isDevelopment = process.env.NODE_ENV === "development";
 
-let config = isDevelopment
+let configPath = isDevelopment
   ? Path.join(__dirname, "config.json")
   : Path.join(process.resourcesPath, "config.json");
-config = JSON.parse(fs.readFileSync(config));
+
+let config = JSON.parse(fs.readFileSync(configPath));
+
+if (config.firstStart) {
+  config.firstStart = false;
+  fs.writeFileSync(configPath, JSON.stringify(config, 2, 2));
+  window.location = "help.html";
+}
 
 let path = config.path;
 if (path == "starter") {
@@ -58,8 +70,10 @@ loginInput.addEventListener("keypress", (e) => {
   if (e.key == "Enter") {
     let hash = crypto.createHash("md5").update(loginInput.value).digest("hex");
     key = hash;
-    if (tabData == {}) return;
     try {
+      if (tabs.length == 0) {
+        ipcRenderer.send("showInstructions");
+      }
       // look for first tab with something in it
       for (tab of tabs) {
         // get first item in tab to try to decrypt it to see if key works
@@ -188,6 +202,7 @@ const menu = document.querySelector(".menu");
 function displayAddNote() {
   let newNoteInput = document.createElement("textarea");
   newNoteInput.classList.add("note");
+  newNoteInput.id = "newNote";
   newNoteInput.placeholder = "Type Here";
   newNoteInput.rows = 1;
   newNoteInput.addEventListener("keyup", (e) => {
@@ -232,6 +247,13 @@ document.addEventListener("keydown", (e) => {
   if (e.key == "N" && e.ctrlKey && e.shiftKey) {
     displayAddTab();
   } else if (e.key == "n" && e.ctrlKey) {
+    if (document.getElementById("newNote")) {
+      let newNoteInput = document.getElementById("newNote");
+      addNote(currentTab, newNoteInput.value);
+      notesEle.removeChild(newNoteInput);
+      loadNotesFromTab(currentTab);
+    }
+
     displayAddNote();
   }
 });
