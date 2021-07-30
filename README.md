@@ -22,11 +22,12 @@ Compiled versions for Windows and Linux coming soon
 
 ## Keyboard Shortcuts
 
-| Shortcut     | Function  |
-| ------------ | --------- |
-| ctrl+w       | Close App |
-| ctrl+n       | New Note  |
-| ctrl+shift+n | New Tab   |
+| Shortcut     | Function     |
+| ------------ | ------------ |
+| ctrl+w       | Close App    |
+| ctrl+r       | Lock Session |
+| ctrl+n       | New Note     |
+| ctrl+shift+n | New Tab      |
 
 ## Background Information
 
