@@ -31,12 +31,21 @@ function creatInstructionsWindow() {
     frame: false,
     transparent: true,
     logo: __dirname + "/Assets/logo.ico",
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      devTools: true,
+    },
   });
   win.setAlwaysOnTop(true);
   if (process.env.NODE_ENV === "development") {
     win.setAlwaysOnTop(true);
   }
   win.loadFile("instructions.html");
+
+  ipcMain.on("closeInstructions", () => {
+    win.close();
+  });
 }
 
 ipcMain.on("openFile", async (event, path) => {

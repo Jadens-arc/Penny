@@ -127,9 +127,10 @@
 
     <script>
       const closeBtn = document.getElementById("closeBtn");
+      const { ipcRenderer, remote } = require("electron");
 
       closeBtn.addEventListener("click", () => {
-        window.close();
+        ipcRenderer.send("closeInstructions");
       });
     </script>
   </body>
