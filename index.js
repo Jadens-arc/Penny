@@ -51,6 +51,8 @@ function creatInstructionsWindow() {
 ipcMain.on("openFile", async (event, path) => {
   let newPath = await dialog.showOpenDialog({
     properties: ["openFile"],
+    filters: [{ name: "Wallets", extensions: ["json"] }],
+    buttonLabel: "Use",
   });
   if (newPath["canceled"]) return;
   event.reply("newPath", newPath["filePaths"][0]);
