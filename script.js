@@ -200,6 +200,11 @@ const addTabBtn = document.getElementById("addTab");
 const menu = document.querySelector(".menu");
 
 function displayAddNote() {
+  if (tabs.length == 0) {
+    alert("Make a new list first");
+    return;
+  }
+
   let newNoteInput = document.createElement("textarea");
   newNoteInput.classList.add("note");
   newNoteInput.id = "newNote";
