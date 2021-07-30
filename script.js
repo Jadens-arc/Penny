@@ -230,7 +230,6 @@ function displayAddTab() {
   newTabEnt.placeholder = "Type Here";
   newTab.appendChild(newTabEnt);
   navEle.appendChild(newTab);
-  newTabEnt.focus();
   newTabEnt.addEventListener("keydown", (e) => {
     if (e.key == "Escape") {
       navEle.removeChild(newTab);
@@ -244,6 +243,7 @@ function displayAddTab() {
       loadTabs();
     }
   });
+  newTabEnt.focus();
 }
 
 addNoteBtn.addEventListener("click", () => {
