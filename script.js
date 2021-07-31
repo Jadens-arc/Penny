@@ -54,7 +54,7 @@ if (path == "starter") {
 ipcRenderer.on("newPath", (event, newPath) => {
   path = newPath;
   config.path = path;
-  fs.writeFileSync("config.json", JSON.stringify(config, 2, 2));
+  fs.writeFileSync(configPath, JSON.stringify(config, 2, 2));
   let file = fs.readFileSync(path);
   tabData = JSON.parse(file);
   tabs = Object.keys(tabData);
