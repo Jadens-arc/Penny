@@ -270,6 +270,8 @@ document.addEventListener("keydown", (e) => {
   } else if (e.key == "A" && e.shiftKey && e.ctrlKey) {
     // Toggle Always on Top //
     ipcRenderer.send("toggleAlwaysOnTop");
+  } else if (e.key == "h" && e.ctrlKey) {
+    ipcRenderer.send("showInstructions");
   }
 });
 
