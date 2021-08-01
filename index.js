@@ -28,7 +28,7 @@ function createWindow() {
   win.loadFile("index.html");
 }
 
-function creatInstructionsWindow() {
+function createInstructionsWindow() {
   let win = new BrowserWindow({
     width: 350,
     height: 600,
@@ -42,15 +42,15 @@ function creatInstructionsWindow() {
       devTools: true,
     },
   });
+
   if (process.env.NODE_ENV === "development") {
     win.setAlwaysOnTop(true);
   }
 
-  win.loadFile("instructions.html");
-
   ipcMain.on("closeInstructions", () => {
-    win.close();
+    win.destroy();
   });
+  win.loadFile("instructions.html");
 }
 
 ipcMain.on("openFile", async (event, path) => {
@@ -64,7 +64,7 @@ ipcMain.on("openFile", async (event, path) => {
 });
 
 ipcMain.on("showInstructions", (event) => {
-  creatInstructionsWindow();
+  createInstructionsWindow();
 });
 
 ipcMain.on("log", (event, msg) => {
