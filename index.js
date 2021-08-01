@@ -46,6 +46,10 @@ function creatInstructionsWindow() {
   ipcMain.on("closeInstructions", () => {
     win.close();
   });
+
+  ipcMain.on("toggleAlwaysOnTop", (event) => {
+    win.setAlwaysOnTop(!win.isAlwaysOnTop());
+  });
 }
 
 ipcMain.on("openFile", async (event, path) => {
