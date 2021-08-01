@@ -250,11 +250,16 @@ addNoteBtn.addEventListener("click", () => {
   displayAddNote();
 });
 
+// handle keyboard shortcuts
 document.addEventListener("keydown", (e) => {
   if (e.key == "N" && e.ctrlKey && e.shiftKey) {
+    // Add Tab //
     displayAddTab();
   } else if (e.key == "n" && e.ctrlKey) {
+    // Add note //
+    // check if new note input already exists
     if (document.getElementById("newNote")) {
+      // if so then save the value of the existing one and remove it
       let newNoteInput = document.getElementById("newNote");
       addNote(currentTab, newNoteInput.value);
       notesEle.removeChild(newNoteInput);
@@ -262,6 +267,9 @@ document.addEventListener("keydown", (e) => {
     }
 
     displayAddNote();
+  } else if (e.key == "A" && e.shiftKey && e.ctrlKey) {
+    // Toggle Always on Top //
+    ipcRenderer.send("toggleAlwaysOnTop");
   }
 });
 
