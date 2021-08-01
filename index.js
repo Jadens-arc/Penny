@@ -20,6 +20,11 @@ function createWindow() {
     win.setAlwaysOnTop(true);
     win.webContents.openDevTools();
   }
+
+  ipcMain.on("toggleAlwaysOnTop", (event, msg) => {
+    win.setAlwaysOnTop(!win.isAlwaysOnTop());
+  });
+
   win.loadFile("index.html");
 }
 
@@ -37,18 +42,14 @@ function creatInstructionsWindow() {
       devTools: true,
     },
   });
-  win.setAlwaysOnTop(true);
   if (process.env.NODE_ENV === "development") {
     win.setAlwaysOnTop(true);
   }
+
   win.loadFile("instructions.html");
 
   ipcMain.on("closeInstructions", () => {
     win.close();
-  });
-
-  ipcMain.on("toggleAlwaysOnTop", (event) => {
-    win.setAlwaysOnTop(!win.isAlwaysOnTop());
   });
 }
 
