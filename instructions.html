@@ -143,8 +143,7 @@
 
     <script>
       const closeBtn = document.getElementById("closeBtn");
-      const { ipcRenderer, remote } = require("electron");
-
+      const { ipcRenderer } = require("electron");
       closeBtn.addEventListener("click", () => {
         ipcRenderer.send("closeInstructions");
       });
