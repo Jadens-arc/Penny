@@ -18,12 +18,24 @@
         --background-color-primary: #171717;
       }
 
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--background-color-primary);
+        border-radius: 50px;
+        border: 2px solid grey;
+      }
+
       body {
-        min-height: 100vh;
+        height: 100vh;
+        overflow: hidden;
       }
 
       main {
-        min-height: 100vh;
+        height: 100vh;
+        overflow-y: scroll;
         background-color: var(--background-color-primary);
         border: 1px solid grey;
         border-radius: 30px;
