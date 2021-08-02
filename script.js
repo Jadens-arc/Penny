@@ -271,14 +271,13 @@ addNoteBtn.addEventListener("click", () => {
 // handle keyboard shortcuts
 document.addEventListener("keydown", (e) => {
   if (!e.ctrlKey) return;
-
-  switch ([e.key, e.shiftKey]) {
+  switch ([e.key, e.shiftKey].toString()) {
     // Add Tab //
-    case ["N", true]:
+    case "N,true":
       displayAddTab();
       break;
     // Add note //
-    case ["n", false]:
+    case "n,false":
       // check if new note input already exists
       if (document.getElementById("newNote")) {
         // if so then save the value of the existing one and remove it
@@ -291,22 +290,24 @@ document.addEventListener("keydown", (e) => {
       displayAddNote();
       break;
     // Toggle Always on Top //
-    case ["A", true]:
+    case "A,true":
       ipcRenderer.send("toggleAlwaysOnTop");
       break;
     // Show Instructions //
-    case ["h", false]:
+    case "h,false":
       ipcRenderer.send("showInstructions");
       break;
     // Insert Date //
-    case ["d", false]:
+    case "d,false":
       insertDate();
       break;
     // Open File //
-    case ["o", false]:
+    case "o,false":
       ipcRenderer.send("openFile");
       location.reload();
       break;
+    default:
+      ipcRenderer.send("log", "found nothin");
   }
 });
 
