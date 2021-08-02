@@ -193,6 +193,24 @@ function addNote(tab, content) {
   fs.writeFileSync(path, JSON.stringify(tabData, 2, 2));
 }
 
+function insertDate() {
+  if (tabs.length == 0) {
+    alert("Make a new list first");
+    return;
+  }
+
+  let d = new Date();
+  let dayOfTheWeek = new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+  }).format(d);
+  let dateString = `${
+    d.getMonth() + 1
+  }/${d.getDate()}/${d.getFullYear()} - ${dayOfTheWeek}`;
+
+  addNote(currentTab, dateString);
+  loadNotesFromTab(currentTab);
+}
+
 const addNoteBtn = document.getElementById("addNoteBtnContainer");
 const menuDeleteBtn = document.getElementById("menuDeleteBtn");
 const menuRenameBtn = document.getElementById("menuRenameBtn");
@@ -271,7 +289,10 @@ document.addEventListener("keydown", (e) => {
     // Toggle Always on Top //
     ipcRenderer.send("toggleAlwaysOnTop");
   } else if (e.key == "h" && e.ctrlKey) {
+    // Show Instructions //
     ipcRenderer.send("showInstructions");
+  } else if (e.key == "d" && e.ctrlKey) {
+    insertDate();
   }
 });
 
