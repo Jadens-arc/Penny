@@ -306,8 +306,6 @@ document.addEventListener("keydown", (e) => {
       ipcRenderer.send("openFile");
       location.reload();
       break;
-    default:
-      ipcRenderer.send("log", "found nothin");
   }
 });
 
