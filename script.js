@@ -272,32 +272,41 @@ addNoteBtn.addEventListener("click", () => {
 document.addEventListener("keydown", (e) => {
   if (!e.ctrlKey) return;
 
-  if (e.key == "N" && e.shiftKey) {
+  switch ([e.key, e.shiftKey]) {
     // Add Tab //
-    displayAddTab();
-  } else if (e.key == "n") {
+    case ["N", true]:
+      displayAddTab();
+      break;
     // Add note //
-    // check if new note input already exists
-    if (document.getElementById("newNote")) {
-      // if so then save the value of the existing one and remove it
-      let newNoteInput = document.getElementById("newNote");
-      addNote(currentTab, newNoteInput.value);
-      notesEle.removeChild(newNoteInput);
-      loadNotesFromTab(currentTab);
-    }
+    case ["n", false]:
+      // check if new note input already exists
+      if (document.getElementById("newNote")) {
+        // if so then save the value of the existing one and remove it
+        let newNoteInput = document.getElementById("newNote");
+        addNote(currentTab, newNoteInput.value);
+        notesEle.removeChild(newNoteInput);
+        loadNotesFromTab(currentTab);
+      }
 
-    displayAddNote();
-  } else if (e.key == "A" && e.shiftKey) {
+      displayAddNote();
+      break;
     // Toggle Always on Top //
-    ipcRenderer.send("toggleAlwaysOnTop");
-  } else if (e.key == "h") {
+    case ["A", true]:
+      ipcRenderer.send("toggleAlwaysOnTop");
+      break;
     // Show Instructions //
-    ipcRenderer.send("showInstructions");
-  } else if (e.key == "d") {
-    insertDate();
-  } else if (e.key == "o") {
-    ipcRenderer.send("openFile");
-    location.reload();
+    case ["h", false]:
+      ipcRenderer.send("showInstructions");
+      break;
+    // Insert Date //
+    case ["d", false]:
+      insertDate();
+      break;
+    // Open File //
+    case ["o", false]:
+      ipcRenderer.send("openFile");
+      location.reload();
+      break;
   }
 });
 
