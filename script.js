@@ -293,6 +293,9 @@ document.addEventListener("keydown", (e) => {
     ipcRenderer.send("showInstructions");
   } else if (e.key == "d" && e.ctrlKey) {
     insertDate();
+  } else if (e.key == "o") {
+    ipcRenderer.send("openFile");
+    location.reload();
   }
 });
 
