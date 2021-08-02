@@ -270,10 +270,12 @@ addNoteBtn.addEventListener("click", () => {
 
 // handle keyboard shortcuts
 document.addEventListener("keydown", (e) => {
-  if (e.key == "N" && e.ctrlKey && e.shiftKey) {
+  if (!e.ctrlKey) return;
+
+  if (e.key == "N" && e.shiftKey) {
     // Add Tab //
     displayAddTab();
-  } else if (e.key == "n" && e.ctrlKey) {
+  } else if (e.key == "n") {
     // Add note //
     // check if new note input already exists
     if (document.getElementById("newNote")) {
@@ -285,13 +287,13 @@ document.addEventListener("keydown", (e) => {
     }
 
     displayAddNote();
-  } else if (e.key == "A" && e.shiftKey && e.ctrlKey) {
+  } else if (e.key == "A" && e.shiftKey) {
     // Toggle Always on Top //
     ipcRenderer.send("toggleAlwaysOnTop");
-  } else if (e.key == "h" && e.ctrlKey) {
+  } else if (e.key == "h") {
     // Show Instructions //
     ipcRenderer.send("showInstructions");
-  } else if (e.key == "d" && e.ctrlKey) {
+  } else if (e.key == "d") {
     insertDate();
   } else if (e.key == "o") {
     ipcRenderer.send("openFile");
