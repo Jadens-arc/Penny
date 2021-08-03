@@ -10,7 +10,7 @@
   "build": {
     "appId": "com.jadens-arc.penny",
     "productName": "Penny",
-    "icon": "./Assets/logo.png",
+    "icon": "./Assets/logo2.png",
     "target": "NSIS",
     "directories": {
       "output": "build"
