@@ -49,7 +49,6 @@ if (path == "starter" && !config.firstStart) {
 }
 
 ipcRenderer.on("newPath", (event, newPath) => {
-  loginInput.disabled = "false";
   path = newPath;
   config.path = path;
   fs.writeFileSync(configPath, JSON.stringify(config, 2, 2));
@@ -62,6 +61,7 @@ ipcRenderer.on("newPath", (event, newPath) => {
   } else {
     loginInput.placeholder = "Type Password Here";
   }
+  loginInput.disabled = false;
 });
 
 loginInput.addEventListener("keypress", (e) => {
