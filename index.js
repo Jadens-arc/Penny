@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const fs = require("fs");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -61,6 +62,15 @@ ipcMain.on("openFile", async (event, path) => {
   });
   if (newPath["canceled"]) return;
   event.reply("newPath", newPath["filePaths"][0]);
+});
+
+ipcMain.on("newWallet", async (event) => {
+  let newWalletPath = await dialog.showSaveDialog({
+    title: "Where do you want to keep your secrets",
+    filters: [{ name: "Wallets", extensions: ["json"] }],
+  });
+  fs.writeFileSync(newWalletPath["filePath"], "{}");
+  event.reply("newPath", newWalletPath["filePath"]);
 });
 
 ipcMain.on("showInstructions", (event) => {
