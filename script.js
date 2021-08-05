@@ -26,22 +26,19 @@ let configPath = isDevelopment
 let config = JSON.parse(fs.readFileSync(configPath));
 
 if (config.firstStart) {
-  config.firstStart = false;
-  fs.writeFileSync(configPath, JSON.stringify(config, 2, 2));
+  let newConfig = Object.assign({}, config);
+  newConfig.firstStart = false;
+  fs.writeFileSync(configPath, JSON.stringify(newConfig, 2, 2));
   window.location = "help.html";
 }
 
 let path = config.path;
-if (path == "starter") {
-  if (isDevelopment) {
-    path = Path.join(__dirname, "starter.json");
-  } else {
-    path = Path.join(process.resourcesPath, "starter.json");
-  }
-}
-
-// read tabs and parse tabs
-(function () {
+if (path == "starter" && !config.firstStart) {
+  loginInput.placeholder = "Where do you want us to store your secrets";
+  loginInput.disabled = "true";
+  ipcRenderer.send("newWallet");
+} else {
+  // read tabs and parse tabs
   let file = fs.readFileSync(path);
   tabData = JSON.parse(file);
   tabs = Object.keys(tabData);
@@ -49,9 +46,10 @@ if (path == "starter") {
     loginInput.placeholder =
       "Type Password Here, this will be your new password";
   }
-})();
+}
 
 ipcRenderer.on("newPath", (event, newPath) => {
+  loginInput.disabled = "false";
   path = newPath;
   config.path = path;
   fs.writeFileSync(configPath, JSON.stringify(config, 2, 2));
