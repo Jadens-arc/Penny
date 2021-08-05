@@ -153,6 +153,11 @@
       closeBtn.addEventListener("click", () => {
         ipcRenderer.send("closeInstructions");
       });
+      document.addEventListener("keydown", (e) => {
+        if (e.key == "w" && e.ctrlKey) {
+          ipcRenderer.send("closeInstructions");
+        }
+      });
     </script>
   </body>
 </html>
