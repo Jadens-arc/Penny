@@ -4,6 +4,10 @@
 
 ## Usage
 
+Download executable from releases (currently only available for windows)
+
+## Development Usage
+
 After cloning repo (and navigating to directory) run
 
 ```bash
@@ -16,18 +20,28 @@ And then run...
 npm test
 ```
 
+To compile application to an executable run
+
+```bash
+npm run dist
+```
+
 ... to start the application
 
 Compiled versions for Windows and Linux coming soon
 
 ## Keyboard Shortcuts
 
-| Shortcut     | Function     |
-| ------------ | ------------ |
-| ctrl+w       | Close App    |
-| ctrl+r       | Lock Session |
-| ctrl+n       | New Note     |
-| ctrl+shift+n | New Tab      |
+| Shortcut     | Function             |
+| ------------ | -------------------- |
+| ctrl+w       | Close App            |
+| ctrl+r       | Lock Session         |
+| ctrl+n       | New Note             |
+| ctrl+shift+n | New Tab              |
+| ctrl+shift+a | Toggle Always on Top |
+| ctrl+h       | Show help Screen     |
+| ctrl+d       | Insert current date  |
+| ctrl+o       | Open new wallet      |
 
 ## Background Information
 
