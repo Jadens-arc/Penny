@@ -69,8 +69,12 @@ ipcMain.on("newWallet", async (event) => {
     title: "Where do you want to keep your secrets",
     filters: [{ name: "Wallets", extensions: ["json"] }],
   });
-  fs.writeFileSync(newWalletPath["filePath"], "{}");
-  event.reply("newPath", newWalletPath["filePath"]);
+  // check if file doesn't exist
+  if (!fs.existsSync(newWalletPath["filePath"])) {
+    // if it doesn't then write boilerplate data to it
+    fs.writeFileSync(newWalletPath["filePath"], "{}");
+  }
+  event.reply("newPath", newWalletPath["filePath"]); // reply with new file path
 });
 
 ipcMain.on("showInstructions", (event) => {
