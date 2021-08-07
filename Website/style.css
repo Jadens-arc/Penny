@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #171717;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  background-color: #171717;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #171717;
+  border-radius: 50px;
+  border: 2px solid grey;
+}
+
+.header-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px;
+  background-image: linear-gradient(#171717 55%, transparent 55%);
+}
+
+header {
+  flex: 1 auto;
+  background-color: #171717;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+header .title {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+header .subtitle {
+  font-size: 2.5rem;
+  font-weight: 100;
+}
+
+header div {
+  display: flex;
+}
+
+header .download-button {
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 2rem;
+  text-decoration: none;
+  color: white;
+  outline: none;
+  margin-left: 30px;
+  padding: 0 10px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  transition: all ease 0.2s;
+}
+
+header .download-button:hover {
+  background-color: rgba(0, 0, 0, 0.349);
+}
+
+main {
+  margin-top: 7rem;
+  padding: 20px;
+}
+
+section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.app-img {
+  height: 80vh;
+  border-radius: 30px;
+  box-shadow: inset 0px 0px 0px 1px grey;
+}
+
+.download-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  border: 1px solid grey;
+  margin-left: 10%;
+}
+
+@media screen and (max-width: 700px) {
+  header .subtitle {
+    display: none;
+  }
+
+  section {
+    flex-direction: column-reverse;
+  }
+
+  .download-container {
+    margin: 20px 0;
+    height: 80vh;
+  }
+}
