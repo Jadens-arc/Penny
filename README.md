@@ -14,6 +14,12 @@ After cloning repo (and navigating to directory) run
 npm i
 ```
 
+Configure your .env file NODE_ENV to development
+
+```env
+NODE_ENV = "development"
+```
+
 And then run...
 
 ```bash
