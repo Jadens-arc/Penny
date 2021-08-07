@@ -8,7 +8,7 @@ Download executable from releases (currently only available for windows)
 
 ## Development Usage
 
-After cloning repo (and navigating to directory) run
+After cloning repo (and navigating to desktop directory) run
 
 ```bash
 npm i
