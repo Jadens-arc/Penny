@@ -12,7 +12,8 @@ export default function NavBar(props) {
       padding: 5,
       overflow: "hidden",
       flexDirection: "row",
-      margin: 20,
+      marginLeft: 20,
+      marginRight: 20,
     },
     scrollview: {
       flex: 1,

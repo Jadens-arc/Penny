@@ -1,9 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, SafeAreaView, View } from "react-native";
+import Title from "./Components/Title";
 import NoteList from "./Components/NotesList";
 import NavBar from "./Components/NavBar";
-import Title from "./Components/Title";
+import AddNoteButton from "./Components/AddNoteButton";
 
 export default function App() {
   let styles = StyleSheet.create({
@@ -11,7 +12,8 @@ export default function App() {
       backgroundColor: "#171717",
       flex: 1,
       color: "white",
-      padding: 20,
+      paddingLeft: 20,
+      paddingRight: 20,
     },
   });
 
@@ -25,6 +27,12 @@ export default function App() {
 
   let [currentList, setCurrentList] = useState(Object.keys(notesData)[0]);
 
+  function appendInput() {
+    let copy = Object.assign({}, notesData);
+    copy[currentList].push("Input");
+    setNotesData(copy);
+  }
+
   return (
     <SafeAreaView style={styles.view}>
       <View style={styles.view}>
@@ -32,6 +40,7 @@ export default function App() {
         <Title text={currentList} />
         <NoteList data={notesData[currentList]} />
       </View>
+      <AddNoteButton appendInput={appendInput} />
       <NavBar data={Object.keys(notesData)} setCurrentList={setCurrentList} />
     </SafeAreaView>
   );
