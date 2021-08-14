@@ -150,14 +150,23 @@ function loadNotesFromTab(tab) {
     newNoteText.innerText = decryptData(note);
     newNoteText.contentEditable = true; // allow paragraph to be editable
     // listen for input
+
+    let timeout = null; // keep track of timeout
     newNoteText.addEventListener("input", (e) => {
-      updateNote(tab, index, newNoteText.innerText); // save changes
       // auto-scroll
       notesEle.scroll({
         left: 0,
         top: notesEle.scrollHeight,
         behavior: "smooth",
       });
+
+      // only save if user is done typing
+      clearTimeout(timeout); // clears old timeouts
+      // create new timeout
+      timeout = setTimeout(() => {
+        // if 300ms pass since the last time the user pressed a key then save
+        updateNote(tab, index, newNoteText.innerText); // save changes
+      }, 300);
     });
 
     // make newNoteDeleteBrn (i) icon
