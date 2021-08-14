@@ -129,37 +129,50 @@ function updateNote(tab, index, value) {
 }
 
 function loadNotesFromTab(tab) {
-  notesEle.innerHTML = "";
-  let title = document.createElement("h1");
-  title.classList.add("title");
-  title.innerText = decryptData(tab);
-  notesEle.appendChild(title);
-  currentTab = tab;
+  notesEle.innerHTML = ""; // Clear preexisting notes
+  // Update page title
+  let title = document.createElement("h1"); // create title element
+  title.classList.add("title"); // give title element class for styles
+  title.innerText = decryptData(tab); // set the titles text to the decrypted tab name
+  notesEle.appendChild(title); // append to dom
+
+  currentTab = tab; // update currentTab Global
+
   let notesData = tabData[tab];
+  // iterate though each note in wallet to add to notesEle
   notesData.forEach((note, index) => {
+    // make newNote (div) for styling
     let newNote = document.createElement("div");
     newNote.classList.add("note");
+
+    // make newNoteText (p) for containing editable text
     let newNoteText = document.createElement("p");
     newNoteText.innerText = decryptData(note);
-    newNoteText.contentEditable = true;
+    newNoteText.contentEditable = true; // allow paragraph to be editable
+    // listen for input
     newNoteText.addEventListener("input", (e) => {
-      updateNote(tab, index, newNoteText.innerText);
+      updateNote(tab, index, newNoteText.innerText); // save changes
+      // auto-scroll
       notesEle.scroll({
         left: 0,
         top: notesEle.scrollHeight,
         behavior: "smooth",
       });
     });
+
+    // make newNoteDeleteBrn (i) icon
     let newNoteDeleteBtn = document.createElement("i");
     newNoteDeleteBtn.classList = "fa fa-times-circle";
     newNoteDeleteBtn.addEventListener("click", () =>
       deleteNote(currentTab, index)
     );
+
+    // append newNoteText and newNoteDeleteBrn to newNote and append newNote to notesEle
     newNote.appendChild(newNoteText);
     newNote.appendChild(newNoteDeleteBtn);
     notesEle.appendChild(newNote);
   });
-  notesEle.scroll({ left: 0, top: notesEle.scrollHeight, behavior: "smooth" });
+  notesEle.scroll({ left: 0, top: notesEle.scrollHeight, behavior: "smooth" }); // auto-scroll
 }
 
 function addTab(name) {
