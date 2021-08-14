@@ -144,6 +144,11 @@ function loadNotesFromTab(tab) {
     newNoteText.contentEditable = true;
     newNoteText.addEventListener("input", (e) => {
       updateNote(tab, index, newNoteText.innerText);
+      notesEle.scroll({
+        left: 0,
+        top: notesEle.scrollHeight,
+        behavior: "smooth",
+      });
     });
     let newNoteDeleteBtn = document.createElement("i");
     newNoteDeleteBtn.classList = "fa fa-times-circle";
@@ -235,6 +240,11 @@ function displayAddNote() {
     if (e.key == "Escape") newNoteInput.remove();
     newNoteInput.style.height = "";
     newNoteInput.style.height = newNoteInput.scrollHeight + "px";
+    notesEle.scroll({
+      left: 0,
+      top: notesEle.scrollHeight,
+      behavior: "smooth",
+    });
   });
   notesEle.appendChild(newNoteInput);
   newNoteInput.focus();
