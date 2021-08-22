@@ -94,7 +94,7 @@ main {
   resize: none;
 }
 
-.selectWallet {
+.settingsButton {
   cursor: pointer;
   position: absolute;
   font-size: 30px;

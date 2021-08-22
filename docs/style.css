@@ -79,11 +79,19 @@ section {
   justify-content: space-between;
 }
 
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .app-img {
   height: 80vh;
   border-radius: 30px;
   box-shadow: inset 0px 0px 0px 1px grey, 0px 0px 5px 0px white;
 }
+
+
 
 .download-container {
   width: 100%;

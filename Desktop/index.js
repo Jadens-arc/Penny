@@ -51,7 +51,32 @@ function createInstructionsWindow() {
   ipcMain.on("closeInstructions", () => {
     win.destroy();
   });
-  win.loadFile("instructions.html");
+  win.loadFile("pages/instructions/instructions.html");
+}
+
+function createSettingsWindow() {
+  let win = new BrowserWindow({
+    width: 350,
+    height: 600,
+    autoHideMenuBar: true,
+    frame: false,
+    transparent: true,
+    logo: __dirname + "/Assets/logo.ico",
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      devTools: true,
+    },
+  });
+
+  if (process.env.NODE_ENV === "development") {
+    win.setAlwaysOnTop(true);
+  }
+
+  ipcMain.on("closeInstructions", () => {
+    win.destroy();
+  });
+  win.loadFile("pages/settings/settings.html");
 }
 
 ipcMain.on("openFile", async (event, path) => {
@@ -62,6 +87,10 @@ ipcMain.on("openFile", async (event, path) => {
   });
   if (newPath["canceled"]) return;
   event.reply("newPath", newPath["filePaths"][0]);
+});
+
+ipcMain.on("showSettings", (event) => {
+  createSettingsWindow();
 });
 
 ipcMain.on("newWallet", async (event) => {

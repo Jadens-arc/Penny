@@ -4,7 +4,7 @@ const { Buffer } = require("buffer");
 const notesEle = document.getElementById("notes");
 const navEle = document.getElementById("nav");
 const loginInput = document.getElementById("login");
-const selectWallet = document.getElementById("selectWallet");
+const settingsButton = document.getElementById("settingsButton");
 const { ipcRenderer } = require("electron");
 const Path = require("path");
 const closeBtn = document.getElementById("closeBtn");
@@ -29,7 +29,7 @@ if (config.firstStart) {
   let newConfig = Object.assign({}, config);
   newConfig.firstStart = false;
   fs.writeFileSync(configPath, JSON.stringify(newConfig, 2, 2));
-  window.location = "help.html";
+  window.location = "pages/help/help.html";
 }
 
 let path = config.path;
@@ -98,8 +98,8 @@ loginInput.addEventListener("keypress", (e) => {
 
 loginInput.focus();
 
-selectWallet.addEventListener("click", (e) => {
-  ipcRenderer.send("openFile");
+settingsButton.addEventListener("click", (e) => {
+  ipcRenderer.send("showSettings");
 });
 
 function decryptData(data = "") {
