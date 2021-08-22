@@ -29,7 +29,7 @@ if (config.firstStart) {
   let newConfig = Object.assign({}, config);
   newConfig.firstStart = false;
   fs.writeFileSync(configPath, JSON.stringify(newConfig, 2, 2));
-  window.location = "pages/help/help.html";
+  window.location = "pages/introduction/introduction.html";
 }
 
 let path = config.path;
