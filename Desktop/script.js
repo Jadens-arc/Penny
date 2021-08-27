@@ -39,12 +39,19 @@ if (path == "starter" && !config.firstStart) {
   ipcRenderer.send("newWallet");
 } else {
   // read tabs and parse tabs
-  let file = fs.readFileSync(path);
-  tabData = JSON.parse(file);
-  tabs = Object.keys(tabData);
-  if (tabs.length == 0) {
-    loginInput.placeholder =
-      "Type Password Here, this will be your new password";
+  try {
+    let file = fs.readFileSync(path);
+    tabData = JSON.parse(file);
+    tabs = Object.keys(tabData);
+    if (tabs.length == 0) {
+      loginInput.placeholder =
+        "Type Password Here, this will be your new password";
+    }
+  } catch {
+    // if file does not exist create openFile dialog
+    if (!config.firstStart) {
+      ipcRenderer.send("openFile");
+    }
   }
 }
 
