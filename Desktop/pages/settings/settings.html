@@ -4,7 +4,150 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Settings</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --text-color: white;
+        --background-color-secondary: #444444;
+        --background-color-primary: #171717;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      main {
+        height: 100vh;
+        overflow-y: scroll;
+        background-color: var(--background-color-primary);
+        border: 1px solid grey;
+        border-radius: 30px;
+        color: white;
+        font-family: sans-serif;
+        padding: 20px;
+      }
+
+      h1 {
+        margin: 10px 0;
+      }
+
+      h2 {
+        margin: 10px 0;
+      }
+
+      .titleBarContainer {
+        position: absolute;
+        z-index: 1000000000;
+        width: 100%;
+        padding: 10px;
+      }
+      .titleBar {
+        -webkit-app-region: drag;
+        border-radius: 30px;
+        height: 40px;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      #closeBtn {
+        color: grey;
+        font-size: 1.5rem;
+        transition: all ease 0.2s;
+        -webkit-app-region: none;
+        border-radius: 50%;
+        height: fit-content;
+        padding: 5px;
+      }
+
+      #closeBtn:hover {
+        color: red;
+      }
+
+      button {
+        border: 1px solid grey;
+        border-radius: 7px;
+        margin-top: 0px;
+        transition: all ease 0.2s;
+        padding: 10px;
+        margin: 15px 10px;
+        cursor: pointer;
+        border-bottom: 1px solid grey;
+        background-color: transparent;
+        color: white;
+      }
+      button:hover {
+        background-color: grey;
+        color: var(--background-color-primary);
+      }
+    </style>
+    <script
+      src="https://kit.fontawesome.com/83c368ecc2.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body></body>
+  <body>
+    <div class="titleBarContainer">
+      <div class="titleBar">
+        <i id="closeBtn" class="far fa-times-circle"></i>
+      </div>
+    </div>
+    <main>
+      <h1>Settings</h1>
+      <button id="loadWallet">Load Wallet</button>
+      <button id="newWallet">New Wallet</button>
+      <br />
+      <button id="help">Help</button>
+    </main>
+    <script>
+      const { ipcRenderer } = require("electron");
+      const Path = require("path");
+      const fs = require("fs");
+      const closeBtn = document.getElementById("closeBtn");
+      let isDevelopment = process.env.NODE_ENV === "development";
+
+      let configPath = isDevelopment
+        ? Path.join(__dirname.split("pages")[0], "config.json")
+        : Path.join(process.resourcesPath, "config.json");
+
+      let config = JSON.parse(fs.readFileSync(configPath));
+
+      closeBtn.addEventListener("click", () => {
+        ipcRenderer.send("closeSettings");
+      });
+
+      ipcRenderer.on("newPath", (event, newPath) => {
+        config.path = newPath;
+        fs.writeFileSync(configPath, JSON.stringify(config, 2, 2));
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key == "w" && e.ctrlKey) {
+          ipcRenderer.send("closeInstructions");
+        }
+      });
+
+      document.getElementById("loadWallet").addEventListener("click", () => {
+        ipcRenderer.send("openFile");
+      });
+
+      document.getElementById("newWallet").addEventListener("click", () => {
+        ipcRenderer.send("newWallet");
+      });
+
+      document.getElementById("help").addEventListener("click", () => {
+        ipcRenderer.send("showInstructions");
+      });
+    </script>
+  </body>
 </html>

@@ -22,8 +22,39 @@ function createWindow() {
     win.webContents.openDevTools();
   }
 
+  ipcMain.on("closeSettings", () => {
+    win.loadFile("index.html");
+  });
+  ipcMain.on("showSettings", (event) => {
+    win.loadFile("pages/settings/settings.html");
+  });
+
   ipcMain.on("toggleAlwaysOnTop", (event, msg) => {
     win.setAlwaysOnTop(!win.isAlwaysOnTop());
+  });
+
+  ipcMain.on("openFile", async (event, path) => {
+    let newPath = await dialog.showOpenDialog({
+      properties: ["openFile"],
+      filters: [{ name: "Wallets", extensions: ["json"] }],
+      buttonLabel: "Use",
+    });
+    if (newPath["canceled"]) return;
+    console.log("path opened");
+    event.reply("newPath", newPath["filePaths"][0]);
+  });
+
+  ipcMain.on("newWallet", async (event) => {
+    let newWalletPath = await dialog.showSaveDialog({
+      title: "Where do you want to keep your secrets",
+      filters: [{ name: "Wallets", extensions: ["json"] }],
+    });
+    // check if file doesn't exist
+    if (!fs.existsSync(newWalletPath["filePath"])) {
+      // if it doesn't then write boilerplate data to it
+      fs.writeFileSync(newWalletPath["filePath"], "{}");
+    }
+    event.reply("newPath", newWalletPath["filePath"]); // reply with new file path
   });
 
   win.loadFile("index.html");
@@ -73,38 +104,11 @@ function createSettingsWindow() {
     win.setAlwaysOnTop(true);
   }
 
-  ipcMain.on("closeInstructions", () => {
+  ipcMain.on("closeSettings", () => {
     win.destroy();
   });
   win.loadFile("pages/settings/settings.html");
 }
-
-ipcMain.on("openFile", async (event, path) => {
-  let newPath = await dialog.showOpenDialog({
-    properties: ["openFile"],
-    filters: [{ name: "Wallets", extensions: ["json"] }],
-    buttonLabel: "Use",
-  });
-  if (newPath["canceled"]) return;
-  event.reply("newPath", newPath["filePaths"][0]);
-});
-
-ipcMain.on("showSettings", (event) => {
-  createSettingsWindow();
-});
-
-ipcMain.on("newWallet", async (event) => {
-  let newWalletPath = await dialog.showSaveDialog({
-    title: "Where do you want to keep your secrets",
-    filters: [{ name: "Wallets", extensions: ["json"] }],
-  });
-  // check if file doesn't exist
-  if (!fs.existsSync(newWalletPath["filePath"])) {
-    // if it doesn't then write boilerplate data to it
-    fs.writeFileSync(newWalletPath["filePath"], "{}");
-  }
-  event.reply("newPath", newWalletPath["filePath"]); // reply with new file path
-});
 
 ipcMain.on("showInstructions", (event) => {
   createInstructionsWindow();
