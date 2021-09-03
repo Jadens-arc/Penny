@@ -5,6 +5,7 @@ const notesEle = document.getElementById("notes");
 const navEle = document.getElementById("nav");
 const loginInput = document.getElementById("login");
 const settingsButton = document.getElementById("settingsButton");
+const pathEle = document.getElementById("path");
 const { ipcRenderer } = require("electron");
 const Path = require("path");
 const closeBtn = document.getElementById("closeBtn");
@@ -43,6 +44,7 @@ if (path == "starter" && !config.firstStart) {
     let file = fs.readFileSync(path);
     tabData = JSON.parse(file);
     tabs = Object.keys(tabData);
+    pathEle.innerText = path;
     if (tabs.length == 0) {
       loginInput.placeholder =
         "Type Password Here, this will be your new password";
@@ -62,6 +64,7 @@ ipcRenderer.on("newPath", (event, newPath) => {
   let file = fs.readFileSync(path);
   tabData = JSON.parse(file);
   tabs = Object.keys(tabData);
+  pathEle.innerText = path;
   if (tabs.length == 0) {
     loginInput.placeholder =
       "Type Password Here, this will be your new password";

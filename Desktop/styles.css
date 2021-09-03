@@ -75,6 +75,17 @@ main {
   filter: blur(10px);
 }
 
+#path {
+  position: absolute;
+  z-index: 100000;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  font-family: sans-serif;
+  font-size: 1rem;
+  color: grey;
+}
+
 .login {
   position: absolute;
   z-index: 100000;
