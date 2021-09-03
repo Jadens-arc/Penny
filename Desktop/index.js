@@ -40,7 +40,6 @@ function createWindow() {
       buttonLabel: "Use",
     });
     if (newPath["canceled"]) return;
-    console.log("path opened");
     event.reply("newPath", newPath["filePaths"][0]);
   });
 
