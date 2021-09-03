@@ -343,6 +343,10 @@ document.addEventListener("keydown", (e) => {
       ipcRenderer.send("openFile");
       location.reload();
       break;
+    // Show Settings //
+    case ",,false":
+      ipcRenderer.send("showSettings");
+      break;
   }
 });
 
