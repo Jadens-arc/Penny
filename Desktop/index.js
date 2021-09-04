@@ -84,31 +84,6 @@ function createInstructionsWindow() {
   win.loadFile("pages/instructions/instructions.html");
 }
 
-function createSettingsWindow() {
-  let win = new BrowserWindow({
-    width: 350,
-    height: 600,
-    autoHideMenuBar: true,
-    frame: false,
-    transparent: true,
-    logo: __dirname + "/Assets/logo.ico",
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      devTools: true,
-    },
-  });
-
-  if (process.env.NODE_ENV === "development") {
-    win.setAlwaysOnTop(true);
-  }
-
-  ipcMain.on("closeSettings", () => {
-    win.destroy();
-  });
-  win.loadFile("pages/settings/settings.html");
-}
-
 ipcMain.on("showInstructions", (event) => {
   createInstructionsWindow();
 });
