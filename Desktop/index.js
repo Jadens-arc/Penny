@@ -1,7 +1,20 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const fs = require("fs");
 const dotenv = require("dotenv");
+const Path = require("path");
 dotenv.config();
+
+let configPath =
+  process.env.NODE_ENV === "development"
+    ? Path.join(__dirname, "config.json")
+    : Path.join(process.resourcesPath, "config.json");
+
+app.on("open-file", (event, path) => {
+  alert("hi");
+  let config = JSON.parse(fs.readFileSync(configPath));
+  config.path = path;
+  fs.writeFileSync(configPath, JSON.stringify(config, 2, 2));
+});
 
 function createWindow() {
   let win = new BrowserWindow({
@@ -36,7 +49,7 @@ function createWindow() {
   ipcMain.on("openFile", async (event, path) => {
     let newPath = await dialog.showOpenDialog({
       properties: ["openFile"],
-      filters: [{ name: "Wallets", extensions: ["json"] }],
+      filters: [{ name: "Wallets", extensions: ["json", "wallet"] }],
       buttonLabel: "Use",
     });
     if (newPath["canceled"]) return;
@@ -46,7 +59,7 @@ function createWindow() {
   ipcMain.on("newWallet", async (event) => {
     let newWalletPath = await dialog.showSaveDialog({
       title: "Where do you want to keep your secrets",
-      filters: [{ name: "Wallets", extensions: ["json"] }],
+      filters: [{ name: "Wallets", extensions: ["json", "wallet"] }],
     });
     // check if file doesn't exist
     if (!fs.existsSync(newWalletPath["filePath"])) {
@@ -55,6 +68,8 @@ function createWindow() {
     }
     event.reply("newPath", newWalletPath["filePath"]); // reply with new file path
   });
+
+  ipcMain.on("makeBackup", async (event, path) => {});
 
   win.loadFile("index.html");
 }
