@@ -15,6 +15,13 @@
     "directories": {
       "output": "build"
     },
+    "fileAssociations": [
+      {
+        "ext": "wallet",
+        "name": "Wallet File",
+        "role": "Editor"
+      }
+    ],
     "nsis": {
       "allowToChangeInstallationDirectory": true,
       "oneClick": false
