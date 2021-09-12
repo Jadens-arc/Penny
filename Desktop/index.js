@@ -59,7 +59,7 @@ function createWindow() {
   ipcMain.on("newWallet", async (event) => {
     let newWalletPath = await dialog.showSaveDialog({
       title: "Where do you want to keep your secrets",
-      filters: [{ name: "Wallets", extensions: ["json", "wallet"] }],
+      filters: [{ name: "Wallets", extensions: ["wallet", "json"] }],
     });
     // check if file doesn't exist
     if (!fs.existsSync(newWalletPath["filePath"])) {
