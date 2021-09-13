@@ -11,97 +11,18 @@ body {
   overflow-x: hidden;
   font-family: sans-serif;
   background-color: black;
-}
-
-#introduction {
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-}
-
-.mainLogoContainer {
-  height: 50vh;
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translate(-50%, -50%);
-  animation: slideIn 1s forwards, slideUp 1.5s 1s forwards;
-}
-
-.mainLogo {
-  height: 100%;
-  pointer-events: none;
-}
-
-a {
-  display: block;
-  font-family: sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  text-align: center;
-  text-decoration: none;
-  color: #ffa794;
-}
-
-.downloadButton {
-  padding: 10px;
-  margin: 40px 0;
-  border: 2px solid #945c54;
-  border-radius: 10px;
-  opacity: 0;
-  animation: fadeIn 1s 1s forwards;
-  transition: all ease 0.3s;
-  cursor: pointer;
-}
-
-.downloadButton:hover {
-  background-color: #ffa794;
-  color: #945c54;
-}
-
-.aboutButton {
-  font-weight: 100;
-  opacity: 0;
-  animation: fadeIn 1s 1s forwards;
-}
-@keyframes slideIn {
-  0% {
-    left: 100%;
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-
-  100% {
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-@keyframes slideUp {
-  0% {
-    transform: translate(-50%, -50%);
-  }
-
-  100% {
-    transform: translate(-50%, -80%);
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+  color: white;
+  font-size: 1.3rem;
 }
 
 #about {
   padding: 20px;
   height: 100vh;
+  line-height: 3rem;
 }
 
 #about h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   color: white;
+  margin-bottom: 2rem;
 }
