@@ -1,0 +1,43 @@
+#about {
+  padding: 20px;
+  height: 100vh;
+  line-height: 3rem;
+}
+
+#about .topBar {
+  display: flex;
+  justify-content: space-between;
+  height: 3rem;
+  margin-bottom: 2rem;
+}
+
+#about .downloadButton {
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  display: flex;
+  width: fit-content;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffa794;
+  color: #945c54;
+  border: 2px solid #945c54;
+  border-radius: 3rem;
+}
+
+#about .downloadButton span {
+  display: block;
+  width: fit-content;
+}
+
+#about .downloadButton img {
+  width: fit-content;
+  display: inline;
+  width: 2rem;
+  margin-left: 1rem;
+}
+
+#about h1 {
+  font-size: 3rem;
+  color: #ffa794;
+}

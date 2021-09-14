@@ -15,14 +15,3 @@ body {
   font-size: 1.3rem;
 }
 
-#about {
-  padding: 20px;
-  height: 100vh;
-  line-height: 3rem;
-}
-
-#about h1 {
-  font-size: 3rem;
-  color: white;
-  margin-bottom: 2rem;
-}
