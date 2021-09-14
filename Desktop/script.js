@@ -5,6 +5,7 @@ const notesEle = document.getElementById("notes");
 const navEle = document.getElementById("nav");
 const loginInput = document.getElementById("login");
 const settingsButton = document.getElementById("settingsButton");
+const settingsTitleButton = document.getElementById("settingsTitleButton");
 const pathEle = document.getElementById("path");
 const { ipcRenderer } = require("electron");
 const Path = require("path");
@@ -94,6 +95,7 @@ loginInput.addEventListener("keypress", (e) => {
       document.getElementById("nav").classList.remove("blur");
       document.getElementById("addNoteBtnContainer").classList.remove("blur");
       document.getElementById("notes").classList.remove("blur");
+      settingsTitleButton.classList.remove("blur");
       document.body.removeChild(document.getElementById("loginWindow"));
       loadTabs();
       loadNotesFromTab(tabs[0]);
@@ -109,6 +111,10 @@ loginInput.addEventListener("keypress", (e) => {
 loginInput.focus();
 
 settingsButton.addEventListener("click", (e) => {
+  ipcRenderer.send("showSettings");
+});
+
+settingsTitleButton.addEventListener("click", (e) => {
   ipcRenderer.send("showSettings");
 });
 

@@ -61,6 +61,16 @@ main {
   color: red;
 }
 
+
+#settingsTitleButton {
+  color: grey;
+  font-size: 1.5rem;
+  -webkit-app-region: none;
+  border-radius: 50%;
+  height: fit-content;
+  padding: 5px;
+}
+
 ::-webkit-scrollbar {
   background-color: var(--background-color-primary);
 }
@@ -73,6 +83,7 @@ main {
 
 .blur {
   filter: blur(10px);
+  pointer-events: none;
 }
 
 #path {
@@ -104,6 +115,8 @@ main {
   -webkit-text-security: circle;
   resize: none;
 }
+
+
 
 .settingsButton {
   cursor: pointer;
