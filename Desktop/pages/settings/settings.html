@@ -111,6 +111,7 @@
       <button id="newWallet">New Wallet</button>
       <button id="backupWallet">Make a Backup</button>
       <button id="help">Help</button>
+      <p>By Jaden Arceneaux</p>
     </main>
     <script>
       const { ipcRenderer } = require("electron");
@@ -150,6 +151,10 @@
 
       document.getElementById("newWallet").addEventListener("click", () => {
         ipcRenderer.send("newWallet");
+      });
+
+      document.getElementById("backupWallet").addEventListener("click", () => {
+        ipcRenderer.send("makeBackup");
       });
 
       document.getElementById("help").addEventListener("click", () => {
