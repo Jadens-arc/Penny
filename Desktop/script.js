@@ -170,11 +170,13 @@ function loadNotesFromTab(tab) {
     let timeout = null; // keep track of timeout
     newNoteText.addEventListener("input", (e) => {
       // auto-scroll
-      notesEle.scroll({
-        left: 0,
-        top: notesEle.scrollHeight,
-        behavior: "smooth",
-      });
+      if (index == notesData.length - 1) {
+        notesEle.scroll({
+          left: 0,
+          top: notesEle.scrollHeight,
+          behavior: "smooth",
+        });
+      }
 
       // only save if user is done typing
       clearTimeout(timeout); // clears old timeouts
