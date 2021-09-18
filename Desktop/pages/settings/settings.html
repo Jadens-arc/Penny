@@ -114,7 +114,7 @@
       <p>By Jaden Arceneaux</p>
     </main>
     <script>
-      const { ipcRenderer } = require("electron");
+      const { ipcRenderer, dialog } = require("electron");
       const Path = require("path");
       const fs = require("fs");
       const closeBtn = document.getElementById("closeBtn");
@@ -139,6 +139,10 @@
         pathEle.innerText = config.path;
       });
 
+      ipcRenderer.on("backupPath", (event, path) => {
+        if (path) fs.writeFileSync(path, fs.readFileSync(config.path));
+      });
+
       document.addEventListener("keydown", (e) => {
         if (e.key == "w" && e.ctrlKey) {
           ipcRenderer.send("closeInstructions");
@@ -153,9 +157,11 @@
         ipcRenderer.send("newWallet");
       });
 
-      document.getElementById("backupWallet").addEventListener("click", () => {
-        ipcRenderer.send("makeBackup");
-      });
+      document
+        .getElementById("backupWallet")
+        .addEventListener("click", async () => {
+          ipcRenderer.send("makeBackup");
+        });
 
       document.getElementById("help").addEventListener("click", () => {
         ipcRenderer.send("showInstructions");

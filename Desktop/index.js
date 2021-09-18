@@ -69,7 +69,13 @@ function createWindow() {
     event.reply("newPath", newWalletPath["filePath"]); // reply with new file path
   });
 
-  ipcMain.on("makeBackup", async (event, path) => {});
+  ipcMain.on("makeBackup", async (event) => {
+    let newWalletPath = await dialog.showSaveDialog({
+      title: "Where do you want to keep your secrets",
+      filters: [{ name: "Wallets", extensions: ["wallet"] }],
+    });
+    event.reply("backupPath", newWalletPath["filePath"]);
+  });
 
   win.loadFile("index.html");
 }
