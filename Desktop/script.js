@@ -318,7 +318,7 @@ addNoteBtn.addEventListener("click", () => {
 
 // handle keyboard shortcuts
 document.addEventListener("keydown", (e) => {
-  if (!e.ctrlKey) return;
+  if (!e.metaKey && !e.ctrlKey) return;
   switch ([e.key, e.shiftKey].toString()) {
     // Add Tab //
     case "N,true":
