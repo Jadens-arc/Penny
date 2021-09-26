@@ -11,6 +11,7 @@ const { ipcRenderer } = require("electron");
 const Path = require("path");
 const closeBtn = document.getElementById("closeBtn");
 
+// handle user clicking close button
 closeBtn.addEventListener("click", () => {
   window.close();
 });
@@ -21,13 +22,17 @@ let currentTab;
 let key;
 let isDevelopment = process.env.NODE_ENV === "development";
 
+// find path of config file for user machines or development machines
 let configPath = isDevelopment
   ? Path.join(__dirname, "config.json")
   : Path.join(process.resourcesPath, "config.json");
 
+// parse config file
 let config = JSON.parse(fs.readFileSync(configPath));
 
+// if its the users first time launching the app open the cut screen and write changes to config file
 if (config.firstStart) {
+  // make a copy of the config file so that when user loads into introduction.html they don't get stuck
   let newConfig = Object.assign({}, config);
   newConfig.firstStart = false;
   fs.writeFileSync(configPath, JSON.stringify(newConfig, 2, 2));
@@ -35,6 +40,9 @@ if (config.firstStart) {
 }
 
 let path = config.path;
+
+// If  the user has not created a wallet prompt them to
+// other wise load the wallet
 if (path == "starter" && !config.firstStart) {
   loginInput.placeholder = "Where do you want us to store your secrets";
   loginInput.disabled = "true";
@@ -46,6 +54,8 @@ if (path == "starter" && !config.firstStart) {
     tabData = JSON.parse(file);
     tabs = Object.keys(tabData);
     pathEle.innerText = path;
+    // If there are no tabs to decrypt then ask for a new password
+    // Password validation is done through trying to decrypt the title of a tab
     if (tabs.length == 0) {
       loginInput.placeholder =
         "Type Password Here, this will be your new password";
@@ -58,10 +68,15 @@ if (path == "starter" && !config.firstStart) {
   }
 }
 
+// Handle new path being sent through IPC
+// (New wallet created, new wallet opened, etc)
 ipcRenderer.on("newPath", (event, newPath) => {
+  // update path and config global variables
   path = newPath;
   config.path = path;
+  // write changes to config file
   fs.writeFileSync(configPath, JSON.stringify(config, 2, 2));
+  // get tabs and notes in the from the wallet at the new path
   let file = fs.readFileSync(path);
   tabData = JSON.parse(file);
   tabs = Object.keys(tabData);
